@@ -1,0 +1,128 @@
+:root {
+  --semantic-background-base: #080808;
+  --semantic-background-raised: #8a8a8a;
+  --semantic-background-interactive: #5a5a5a;
+  --semantic-background-overlay: #3a3a3a;
+  --semantic-background-backdrop: #00000080;
+  --semantic-background-muted: #2d2d2d;
+  --semantic-border-subtle: #2d2d2d;
+  --semantic-border-muted: #212121;
+  --semantic-border-strong: #e5e5e5;
+  --semantic-brand-base: #e0dd5b;
+  --semantic-brand-hover: #e3df5f;
+  --semantic-brand-active: #c9c652;
+  --semantic-brand-pressed: #b1ae48;
+  --semantic-brand-muted: #1b1a05;
+  --semantic-brand-mode: #49482c;
+  --semantic-text-primary: var(--color-text-primary);
+  --semantic-text-secondary: var(--color-text-secondary);
+  --semantic-text-subtle: var(--semantic-text-secondary);
+  --semantic-text-muted: var(--color-text-muted);
+  --semantic-text-inverse: var(--color-text-inverse);
+  --semantic-text-hover: var(--color-text-hover);
+  --semantic-feedback-success-base: #5f7b52;
+  --semantic-feedback-success-surface: #5f7b5224;
+  --semantic-feedback-success-texton: #080808;
+  --semantic-feedback-warning-base: #a88940;
+  --semantic-feedback-warning-surface: #a8894024;
+  --semantic-feedback-warning-texton: #080808;
+  --semantic-feedback-error-base: #9e4b4b;
+  --semantic-feedback-error-surface: #9e4b4b24;
+  --semantic-feedback-error-texton: #080808;
+  --semantic-focus-ring: #e0dd5b59;
+  --poi-prison: #f25f5c;
+  --poi-police: #f25f5c;
+  --poi-courthouse: #f25f5c;
+  --poi-stripclub: #f2a65a;
+  --poi-nightclub: #f2a65a;
+  --poi-bar: #f2a65a;
+  --poi-marketplace: #8bd17c;
+  --poi-casino: #8bd17c;
+  --poi-bus-station: #8bd17c;
+  --poi-shelter: #aeb9c9;
+  --poi-community-centre: #aeb9c9;
+  --poi-place-of-worship: #aeb9c9;
+  --poi-point-generic: #c3a5df;
+  --connections-cluster-1: #8a38f5;
+  --connections-cluster-2: #3b82f6;
+  --connections-color: #fb923c;
+  --tone-grey-default: var(--color-fill-neutral-200);
+  --tone-grey-focused: var(--color-fill-neutral-200);
+  --tone-grey-hover: var(--color-fill-neutral-300);
+  --tone-grey-disabled: var(--color-fill-neutral-800);
+  --font-family-base: var(--typography-mode-1-font-family-ibm-plex-sans);
+  
+  /* Display Scale - based on height */
+  --fonts-display-2xl: var(--typography-mode-1-font-size-72); /* 72px */
+  --fonts-display-xl: var(--typography-mode-1-font-size-60); /* 60px */
+  --fonts-display-lg: var(--typography-mode-1-font-size-48); /* 48px */
+  --fonts-display-md: var(--typography-mode-1-font-size-36); /* 36px */
+  --fonts-display-sm: var(--typography-mode-1-font-size-30); /* 30px */
+  --fonts-display-xs: var(--typography-mode-1-font-size-24); /* 24px */
+  --fonts-display-2xl-line-height: var(--typography-mode-1-line-height-90);
+  --fonts-display-xl-line-height: var(--typography-mode-1-line-height-72);
+  --fonts-display-lg-line-height: var(--typography-mode-1-line-height-60);
+  --fonts-display-md-line-height: var(--typography-mode-1-line-height-44);
+  --fonts-display-sm-line-height: var(--typography-mode-1-line-height-38);
+  --fonts-display-xs-line-height: var(--typography-mode-1-line-height-32);
+  
+  /* Semantic Scale - UI text */
+  --fonts-semantic-2xl: var(--typography-mode-1-font-size-20); /* 20px */
+  --fonts-semantic-xl: var(--typography-mode-1-font-size-18); /* 18px */
+  --fonts-semantic-lg: var(--typography-mode-1-font-size-16); /* 16px */
+  --fonts-semantic-md: var(--typography-mode-1-font-size-14); /* 14px */
+  --fonts-semantic-sm: var(--typography-mode-1-font-size-12); /* 12px */
+  --fonts-semantic-xs: var(--typography-mode-1-font-size-11); /* 11px */
+  --fonts-semantic-xxs: var(--typography-mode-1-font-size-10); /* 10px */
+  --fonts-semantic-2xl-line-height: var(--typography-mode-1-line-height-28);
+  --fonts-semantic-xl-line-height: var(--typography-mode-1-line-height-24);
+  --fonts-semantic-lg-line-height: var(--typography-mode-1-line-height-24);
+  --fonts-semantic-md-line-height: var(--typography-mode-1-line-height-20);
+  --fonts-semantic-sm-line-height: var(--typography-mode-1-line-height-16);
+  --fonts-semantic-xs-line-height: var(--typography-mode-1-line-height-18);
+  --fonts-semantic-xxs-line-height: var(--typography-mode-1-line-height-14);
+  
+  /* Legacy aliases for backward compatibility during migration */
+  --font-size-10: var(--fonts-semantic-xxs);
+  --font-size-11: var(--fonts-semantic-xs);
+  --font-size-12: var(--fonts-semantic-sm);
+  --font-size-14: var(--fonts-semantic-md);
+  --font-size-16: var(--fonts-semantic-lg);
+  --font-size-18: var(--fonts-semantic-xl);
+  --font-size-20: var(--fonts-semantic-2xl);
+  --font-size-24: var(--fonts-display-xs);
+  --font-size-30: var(--fonts-display-sm);
+  --font-size-36: var(--fonts-display-md);
+  --font-size-48: var(--fonts-display-lg);
+  --font-size-60: var(--fonts-display-xl);
+  --font-size-72: var(--fonts-display-2xl);
+  --line-14: var(--fonts-semantic-xxs-line-height);
+  --line-16: var(--fonts-semantic-sm-line-height);
+  --line-18: var(--fonts-semantic-xs-line-height);
+  --line-20: var(--fonts-semantic-md-line-height);
+  --line-24: var(--fonts-semantic-lg-line-height);
+  --line-28: var(--fonts-semantic-2xl-line-height);
+  --line-30: var(--typography-mode-1-line-height-30);
+  --line-32: var(--fonts-display-xs-line-height);
+  --line-38: var(--fonts-display-sm-line-height);
+  --line-44: var(--fonts-display-md-line-height);
+  --line-60: var(--fonts-display-lg-line-height);
+  --line-72: var(--fonts-display-xl-line-height);
+  --line-90: var(--fonts-display-2xl-line-height);
+  --font-weight-regular: var(--typography-mode-1-font-weight-regular);
+  --font-weight-medium: var(--typography-mode-1-font-weight-medium);
+  --font-weight-semibold: var(--typography-mode-1-font-weight-semibold);
+  --font-weight-bold: var(--typography-mode-1-font-weight-bold);
+  --spacing-8: var(--spacing-style-spacing-4px-2-8px);
+  --spacing-12: var(--spacing-style-spacing-4px-3-12px);
+  --radius-xs: var(--radius-mode-1-radius-xs);
+  --radius-sm: var(--radius-mode-1-radius-sm);
+  --radius-md: var(--radius-mode-1-radius-md);
+  --border-width-thin: var(--border-widths-mode-1-border-width-thin);
+  --border-text-hover: var(--semantic-text-hover);
+  --border-text-subtle: var(--semantic-border-subtle);
+  --border-text-strong: var(--semantic-border-strong);
+  --border-text-muted: var(--semantic-border-muted);
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-skeuomorphic: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}

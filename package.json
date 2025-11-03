@@ -1,0 +1,36 @@
+{
+  "name": "arkem-design-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "homepage": "https://marcohckd.github.io/arkem-design-system",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "deploy-storybook": "storybook build && npx gh-pages -d storybook-static"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "lucide-react": "^0.548.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.1.2",
+    "@storybook/addon-a11y": "^10.0.2",
+    "@storybook/addon-docs": "^10.0.2",
+    "@storybook/addon-onboarding": "^10.0.2",
+    "@storybook/addon-vitest": "^10.0.2",
+    "@storybook/react-vite": "^10.0.2",
+    "@vitest/browser-playwright": "^4.0.5",
+    "@vitest/coverage-v8": "^4.0.5",
+    "playwright": "^1.56.1",
+    "prop-types": "^15.8.1",
+    "storybook": "^10.0.2",
+    "tsx": "^4.20.6",
+    "vitest": "^4.0.5"
+  }
+}
