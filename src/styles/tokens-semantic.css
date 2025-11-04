@@ -20,14 +20,19 @@
   --semantic-text-muted: var(--color-text-muted);
   --semantic-text-inverse: var(--color-text-inverse);
   --semantic-text-hover: var(--color-text-hover);
+  --semantic-text-light: #f0f0f0;
+  --semantic-text-label: #a0a7b4;
   --semantic-feedback-success-base: #5f7b52;
   --semantic-feedback-success-surface: #5f7b5224;
+  --semantic-feedback-success-muted: #5f7b5233;
   --semantic-feedback-success-texton: #080808;
   --semantic-feedback-warning-base: #a88940;
   --semantic-feedback-warning-surface: #a8894024;
+  --semantic-feedback-warning-muted: #a8894033;
   --semantic-feedback-warning-texton: #080808;
   --semantic-feedback-error-base: #9e4b4b;
   --semantic-feedback-error-surface: #9e4b4b24;
+  --semantic-feedback-error-muted: #9e4b4b33;
   --semantic-feedback-error-texton: #080808;
   --semantic-focus-ring: #e0dd5b59;
   --poi-prison: #f25f5c;
@@ -82,6 +87,14 @@
   --fonts-semantic-xs-line-height: var(--typography-mode-1-line-height-18);
   --fonts-semantic-xxs-line-height: var(--typography-mode-1-line-height-14);
   
+  /* Heading Scale - Small headings for UI components */
+  --heading-xs-font-size: var(--fonts-semantic-sm); /* 12px */
+  --heading-xs-font-weight: var(--font-weight-medium); /* 500 */
+  --heading-xs-line-height: var(--fonts-semantic-xs-line-height); /* 18px */
+  
+  /* Typography Utilities */
+  --text-transform-uppercase: uppercase;
+  
   /* Legacy aliases for backward compatibility during migration */
   --font-size-10: var(--fonts-semantic-xxs);
   --font-size-11: var(--fonts-semantic-xs);
@@ -114,15 +127,19 @@
   --font-weight-semibold: var(--typography-mode-1-font-weight-semibold);
   --font-weight-bold: var(--typography-mode-1-font-weight-bold);
   --spacing-8: var(--spacing-style-spacing-4px-2-8px);
+  --spacing-10: 10px;
   --spacing-12: var(--spacing-style-spacing-4px-3-12px);
+  --spacing-14: 14px;
   --radius-xs: var(--radius-mode-1-radius-xs);
   --radius-sm: var(--radius-mode-1-radius-sm);
   --radius-md: var(--radius-mode-1-radius-md);
   --border-width-thin: var(--border-widths-mode-1-border-width-thin);
+  --border-width-hairline: var(--border-widths-mode-1-border-widht-hairline);
   --border-text-hover: var(--semantic-text-hover);
   --border-text-subtle: var(--semantic-border-subtle);
   --border-text-strong: var(--semantic-border-strong);
   --border-text-muted: var(--semantic-border-muted);
+  --semantic-divider: var(--color-fill-neutral-500);
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-skeuomorphic: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }

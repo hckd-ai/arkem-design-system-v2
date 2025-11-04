@@ -1,0 +1,57 @@
+.arkem-header-xs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: 0;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  min-height: 0;
+}
+
+.arkem-header-xs__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: currentColor;
+}
+
+.arkem-header-xs[data-variant="default"] .arkem-header-xs__icon,
+.arkem-header-xs[data-variant="default"] .arkem-header-xs__text {
+  color: var(--semantic-text-primary);
+}
+
+.arkem-header-xs[data-variant="success"] .arkem-header-xs__icon,
+.arkem-header-xs[data-variant="success"] .arkem-header-xs__text {
+  color: var(--semantic-feedback-success-base);
+}
+
+.arkem-header-xs[data-variant="warning"] .arkem-header-xs__icon,
+.arkem-header-xs[data-variant="warning"] .arkem-header-xs__text {
+  color: var(--semantic-feedback-warning-base);
+}
+
+.arkem-header-xs[data-variant="error"] .arkem-header-xs__icon,
+.arkem-header-xs[data-variant="error"] .arkem-header-xs__text {
+  color: var(--semantic-feedback-error-base);
+}
+
+.arkem-header-xs[data-variant="info"] .arkem-header-xs__icon,
+.arkem-header-xs[data-variant="info"] .arkem-header-xs__text {
+  color: var(--semantic-text-secondary);
+}
+
+.arkem-header-xs__text {
+  font-family: var(--font-family-base);
+  font-size: var(--fonts-semantic-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--fonts-semantic-lg-line-height);
+  margin: 0;
+  padding: 0;
+}
+

@@ -1,0 +1,37 @@
+.arkem-field {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0;
+  gap: var(--spacing-12);
+  width: 100%;
+  flex: none;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.arkem-field__label {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--fonts-semantic-xs);
+  line-height: var(--fonts-semantic-sm-line-height);
+  text-transform: var(--text-transform-uppercase);
+  color: var(--semantic-text-label);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  white-space: nowrap;
+}
+
+.arkem-field__value {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--fonts-semantic-xs);
+  line-height: var(--fonts-semantic-sm-line-height);
+  color: var(--semantic-text-light);
+  text-align: right;
+  flex: 1;
+  order: 1;
+  flex-grow: 1;
+}
+
