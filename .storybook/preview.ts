@@ -1,5 +1,6 @@
 import "../src/styles/tokens.css";
 import "../src/styles/tokens-semantic.css";
+import "../src/styles/global.css";
 
 import type { Preview } from "@storybook/react";
 
