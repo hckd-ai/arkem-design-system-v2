@@ -1,0 +1,811 @@
+.arkem-user-access-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--font-family-base);
+  background: var(--semantic-background-base);
+}
+
+.arkem-user-access-table__batch-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin-bottom: var(--spacing-style-spacing-4px-3-12px);
+  padding: var(--spacing-style-spacing-4px-3-12px);
+  background: var(--semantic-brand-muted);
+  border: var(--border-width-thin) solid var(--semantic-brand-mode);
+  border-radius: var(--radius-mode-1-radius-md);
+  backdrop-filter: blur(8px);
+}
+
+.arkem-user-access-table__batch-count {
+  font-size: var(--fonts-semantic-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--semantic-text-primary);
+}
+
+.arkem-user-access-table__empty,
+.arkem-user-access-table__error {
+  padding: var(--spacing-style-spacing-4px-6-24px);
+  text-align: center;
+  font-size: var(--fonts-semantic-md);
+  color: var(--semantic-text-secondary);
+}
+
+.arkem-user-access-table__error {
+  color: var(--semantic-feedback-error-base);
+}
+
+.arkem-user-access-table__scroll-container {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+  border: var(--table-border-outer-width) solid var(--table-border-outer);
+  border-radius: var(--table-border-outer-radius);
+}
+
+/* Scroll indicators */
+.arkem-user-access-table__scroll-container::before,
+.arkem-user-access-table__scroll-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--table-scroll-indicator-width);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.arkem-user-access-table__scroll-container::before {
+  left: 0;
+  background: linear-gradient(to right, var(--table-scroll-indicator-overlay), transparent);
+}
+
+.arkem-user-access-table__scroll-container::after {
+  right: 0;
+  background: linear-gradient(to left, var(--table-scroll-indicator-overlay), transparent);
+}
+
+/* Show scroll indicators when content is scrollable (requires JS or manual class) */
+.arkem-user-access-table__scroll-container[data-scrollable="true"]::after {
+  opacity: 1;
+}
+
+.arkem-user-access-table__scroll-container[data-scrolled="true"]::before {
+  opacity: 1;
+}
+
+.arkem-user-access-table__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.arkem-user-access-table__thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--table-header-bg);
+  backdrop-filter: blur(8px);
+}
+
+@supports (backdrop-filter: blur(8px)) {
+  .arkem-user-access-table__thead {
+    background: color-mix(in srgb, var(--table-header-bg) 95%, transparent);
+  }
+}
+
+.arkem-user-access-table__header-row {
+  height: var(--spacing-style-spacing-4px-10-40px);
+}
+
+.arkem-user-access-table__header-row--group {
+  border-bottom: var(--border-width-thin) solid var(--table-border);
+}
+
+.arkem-user-access-table__subheader-row {
+  height: var(--spacing-style-spacing-4px-10-40px);
+}
+
+.arkem-user-access-table__header-cell {
+  padding: var(--spacing-style-spacing-4px-2-8px) var(--spacing-style-spacing-4px-3-12px);
+  text-align: left;
+  font-size: var(--fonts-semantic-xxs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--fonts-semantic-xs-line-height);
+  color: var(--semantic-text-muted);
+  text-transform: lowercase;
+  border-bottom: var(--border-width-hairline) solid var(--table-border);
+  white-space: nowrap;
+  background: var(--table-header-bg);
+  vertical-align: middle;
+}
+
+.arkem-user-access-table__header-cell--group {
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--fonts-semantic-md);
+  line-height: var(--fonts-semantic-md-line-height);
+  color: var(--table-label-text);
+  text-transform: uppercase;
+  padding: var(--spacing-style-spacing-4px-2-8px) var(--spacing-style-spacing-4px-3-12px);
+  background: var(--table-header-bg);
+}
+
+/* Borders between major groups only */
+/* Removed left border from first group (users) for cleaner appearance */
+
+.arkem-user-access-table__header-cell--group:not(:last-of-type) {
+  border-right: var(--border-width-thin) solid var(--table-border);
+}
+
+.arkem-user-access-table__header-cell--actions {
+  width: var(--table-col-actions-width);
+  min-width: var(--table-col-actions-width);
+  max-width: var(--table-col-actions-width);
+  border-left: var(--border-width-thin) solid var(--table-border);
+  text-align: center;
+}
+
+.arkem-user-access-table__subheader-cell {
+  padding: var(--spacing-style-spacing-4px-4-16px) var(--spacing-style-spacing-4px-5-20px);
+  text-align: left;
+  font-size: var(--fonts-semantic-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--fonts-semantic-md-line-height);
+  color: var(--table-label-text);
+  border-bottom: var(--border-width-hairline) solid var(--table-border);
+  white-space: nowrap;
+  background: var(--table-header-bg);
+  vertical-align: middle;
+}
+
+.arkem-user-access-table__subheader-cell--checkbox {
+  position: sticky;
+  left: 0;
+  z-index: 12;
+  width: var(--table-col-icon-width);
+  min-width: var(--table-col-icon-width);
+  max-width: var(--table-col-icon-width);
+  text-align: center;
+  vertical-align: middle;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-2-8px);
+  border-right: var(--border-width-thin) solid var(--table-border);
+  background: var(--table-header-bg);
+  backdrop-filter: blur(8px);
+}
+
+@supports (backdrop-filter: blur(8px)) {
+  .arkem-user-access-table__subheader-cell--checkbox {
+    background: color-mix(in srgb, var(--table-header-bg) 95%, transparent);
+  }
+}
+
+.arkem-user-access-table__subheader-cell--sticky {
+  position: sticky;
+  left: var(--table-col-icon-width);
+  z-index: 11;
+  min-width: var(--table-col-name-min);
+  width: auto;
+  background: var(--table-header-bg);
+  backdrop-filter: blur(8px);
+  border-right: none; /* No border between User and Role - unified USERS group */
+}
+
+@supports (backdrop-filter: blur(8px)) {
+  .arkem-user-access-table__subheader-cell--sticky {
+    background: color-mix(in srgb, var(--table-header-bg) 95%, transparent);
+  }
+}
+
+.arkem-user-access-table__subheader-cell--icon {
+  width: var(--table-col-icon-width);
+  min-width: var(--table-col-icon-width);
+  max-width: var(--table-col-icon-width);
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-1-4px);
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Borders between major groups only - no borders within groups */
+/* User subheader cell - no border (unified with Role) */
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--sticky {
+  border-right: none;
+}
+
+/* User ID column (3rd child) */
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(3) {
+  min-width: var(--table-col-number-min);
+  width: var(--table-col-number-min);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-3-12px);
+  border-left: none; /* No border between Name and User ID - unified USERS group */
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
+.arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(3) {
+  min-width: var(--table-col-number-min);
+  width: var(--table-col-number-min);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-3-12px);
+  border-left: none; /* No border between Name and User ID - unified USERS group */
+}
+
+/* After USERS group (after Role column) */
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(4) {
+  min-width: var(--table-col-number-min);
+  width: var(--table-col-number-min);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-3-12px);
+  border-right: var(--border-width-thin) solid var(--table-border);
+  border-left: none; /* No border between User ID and Role - unified USERS group */
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
+/* After MODULE ACCESS group (after 7th module icon) */
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(11) {
+  border-right: var(--border-width-thin) solid var(--table-border);
+}
+
+/* Data access subheader cells - first two are numbers (centered), last three are icons (centered) */
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(12),
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(13) {
+  min-width: var(--table-col-number-min);
+  width: auto;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-3-12px);
+}
+
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(14),
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(15) {
+  min-width: var(--table-col-icon-header-min);
+  width: auto;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-2-8px);
+  text-align: center;
+  vertical-align: middle;
+  border-left: var(--border-width-hairline) solid var(--table-border-data-access);
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
+/* AI Assistant column (16th child) - flexible, not sticky */
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(16) {
+  min-width: var(--table-col-icon-header-min);
+  width: auto;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-2-8px);
+  text-align: center;
+  vertical-align: middle;
+  border-left: var(--border-width-hairline) solid var(--table-border-data-access);
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+  position: static; /* Explicitly not sticky */
+}
+
+/* Actions subheader cell */
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 11;
+  width: var(--table-col-actions-width);
+  min-width: var(--table-col-actions-width);
+  max-width: var(--table-col-actions-width);
+  text-align: center;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-1-4px);
+  background: var(--table-header-bg);
+  backdrop-filter: blur(8px);
+}
+
+@supports (backdrop-filter: blur(8px)) {
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:last-child {
+    background: color-mix(in srgb, var(--table-header-bg) 95%, transparent);
+  }
+}
+
+/* After DATA ACCESS group (after 5th data access column) */
+.arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(16) {
+  border-right: var(--border-width-thin) solid var(--table-border);
+}
+
+.arkem-user-access-table__icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arkem-user-access-table__header-icon {
+  color: var(--icon-muted);
+  transition: color 0.15s ease;
+}
+
+.arkem-user-access-table__subheader-cell--icon:hover .arkem-user-access-table__header-icon {
+  color: var(--table-label-text);
+}
+
+.arkem-user-access-table__sortable-header {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-style-spacing-4px-1-4px);
+  cursor: pointer;
+  user-select: none;
+}
+
+.arkem-user-access-table__sortable-header:hover {
+  color: var(--table-label-text);
+}
+
+.arkem-user-access-table__sortable-header:hover .arkem-user-access-table__sort-icon {
+  opacity: 0.5;
+}
+
+.arkem-user-access-table__sort-icon {
+  width: var(--spacing-style-spacing-4px-3-12px);
+  height: var(--spacing-style-spacing-4px-3-12px);
+  opacity: 0.3;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.arkem-user-access-table__sort-icon--active {
+  opacity: 0.8;
+}
+
+.arkem-user-access-table__sort-icon--active.arkem-user-access-table__sort-icon--desc {
+  transform: rotate(180deg);
+}
+
+.arkem-user-access-table__tbody {
+  background: var(--semantic-background-base);
+}
+
+.arkem-user-access-table__row {
+  height: auto;
+  min-height: calc(var(--table-row-padding-y-large) * 2 + var(--fonts-semantic-md-line-height));
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  border-bottom: var(--border-width-hairline) solid var(--table-row-divider);
+}
+
+.arkem-user-access-table__row:nth-child(odd) {
+  background-color: var(--table-row-odd);
+}
+
+.arkem-user-access-table__row:nth-child(even) {
+  background-color: var(--table-row-even);
+}
+
+.arkem-user-access-table__row:hover {
+  background-color: var(--table-row-hover);
+}
+
+.arkem-user-access-table__row[data-selected] {
+  background-color: var(--table-row-selected);
+  box-shadow: inset var(--border-widths-mode-1-border-width-medium) 0 0 var(--semantic-brand-base);
+  position: relative;
+}
+
+.arkem-user-access-table__row[data-selected]:hover {
+  background-color: var(--table-row-selected);
+}
+
+.arkem-user-access-table__row:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.arkem-user-access-table__row[data-selected]:focus-visible {
+  outline: none;
+  box-shadow: inset var(--border-widths-mode-1-border-width-medium) 0 0 var(--semantic-brand-base), inset 0 0 0 var(--border-widths-mode-1-border-width-medium) var(--semantic-focus-ring);
+}
+
+.arkem-user-access-table__cell {
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-5-20px);
+  font-size: var(--fonts-semantic-sm);
+  line-height: var(--fonts-semantic-md-line-height);
+  color: var(--table-body-text);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.arkem-user-access-table__cell--checkbox {
+  position: sticky;
+  left: 0;
+  z-index: 11;
+  width: var(--table-col-icon-width);
+  min-width: var(--table-col-icon-width);
+  max-width: var(--table-col-icon-width);
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-2-8px);
+  text-align: center;
+  vertical-align: middle;
+  background: inherit;
+}
+
+.arkem-user-access-table__cell--icon {
+  width: var(--table-col-icon-width);
+  min-width: var(--table-col-icon-width);
+  max-width: var(--table-col-icon-width);
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-1-4px);
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Borders between major groups only - no borders within groups */
+/* User data cell - no border (unified with Role) */
+.arkem-user-access-table__row .arkem-user-access-table__cell--sticky {
+  border-right: none;
+}
+
+/* After USERS group (after Role column) */
+.arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(4) {
+  min-width: var(--table-col-number-min);
+  width: var(--table-col-number-min);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-3-12px);
+  border-right: var(--border-width-thin) solid var(--table-border);
+  border-left: none; /* No border between User ID and Role - unified USERS group */
+}
+
+/* Data access cells - first two are numbers (centered), last three are icons (centered) */
+.arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(12),
+.arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(13) {
+  min-width: var(--table-col-number-min);
+  width: auto;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-3-12px);
+}
+
+.arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(14),
+.arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(15) {
+  min-width: var(--table-col-icon-header-min);
+  width: auto;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-2-8px);
+  text-align: center;
+  vertical-align: middle;
+  border-left: var(--border-width-hairline) solid var(--table-border-data-access);
+}
+
+/* AI Assistant column (16th child) - flexible, not sticky */
+.arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(16) {
+  min-width: var(--table-col-icon-header-min);
+  width: auto;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-2-8px);
+  text-align: center;
+  vertical-align: middle;
+  border-left: var(--border-width-hairline) solid var(--table-border-data-access);
+  position: static; /* Explicitly not sticky */
+}
+
+/* Actions cell */
+.arkem-user-access-table__row .arkem-user-access-table__cell:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 10;
+  width: var(--table-col-actions-width);
+  min-width: var(--table-col-actions-width);
+  max-width: var(--table-col-actions-width);
+  text-align: center;
+  padding: var(--table-row-padding-y-large) var(--spacing-style-spacing-4px-1-4px);
+  background: inherit;
+}
+
+/* After MODULE ACCESS group (after 7th module icon) */
+.arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(11) {
+  border-right: var(--border-width-thin) solid var(--table-border);
+}
+
+/* After DATA ACCESS group (after 5th data access column) */
+.arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(16) {
+  border-right: var(--border-width-thin) solid var(--table-border);
+}
+
+.arkem-user-access-table__cell--sticky {
+  position: sticky;
+  left: var(--table-col-icon-width);
+  z-index: 10;
+  min-width: var(--table-col-name-min);
+  width: auto;
+  background: inherit;
+  border-right: none; /* No border between User and Role - unified USERS group */
+}
+
+.arkem-user-access-table__row:hover .arkem-user-access-table__cell--sticky {
+  background: inherit;
+}
+
+.arkem-user-access-table__row[data-selected] .arkem-user-access-table__cell--sticky {
+  background: inherit;
+}
+
+.arkem-user-access-table__row:hover .arkem-user-access-table__cell--checkbox {
+  background: inherit;
+}
+
+.arkem-user-access-table__row[data-selected] .arkem-user-access-table__cell--checkbox {
+  background: inherit;
+}
+
+.arkem-user-access-table__row:hover .arkem-user-access-table__cell:last-child {
+  background: inherit;
+}
+
+.arkem-user-access-table__row[data-selected] .arkem-user-access-table__cell:last-child {
+  background: inherit;
+}
+
+.arkem-user-access-table__user-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-style-spacing-4px-3-12px);
+}
+
+.arkem-user-access-table__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-style-spacing-4px-6-24px);
+  height: var(--spacing-style-spacing-4px-6-24px);
+  border-radius: 50%;
+  background: var(--semantic-background-interactive);
+  color: var(--semantic-text-primary);
+  font-size: var(--fonts-semantic-xs);
+  font-weight: var(--font-weight-medium);
+  flex-shrink: 0;
+}
+
+.arkem-user-access-table__user-name {
+  font-size: var(--fonts-semantic-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--semantic-text-primary);
+  text-align: left;
+}
+
+.arkem-user-access-table__module-icon {
+  display: inline-block;
+  color: var(--semantic-brand-base);
+}
+
+.arkem-user-access-table__module-icon--denied {
+  color: var(--icon-weak);
+  opacity: 1;
+}
+
+.arkem-user-access-table__check-icon {
+  display: inline-block;
+  color: var(--semantic-brand-base);
+}
+
+.arkem-user-access-table__check-icon--disabled {
+  color: var(--icon-weak);
+  opacity: 1;
+}
+
+.arkem-user-access-table__edit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-style-spacing-4px-6-24px);
+  height: var(--spacing-style-spacing-4px-6-24px);
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-xs);
+  color: var(--semantic-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.arkem-user-access-table__edit-button:hover {
+  background: var(--semantic-background-interactive);
+  color: var(--semantic-text-primary);
+}
+
+.arkem-user-access-table__edit-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--semantic-focus-ring);
+}
+
+.arkem-user-access-table__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE (< 768px)
+   ======================================== */
+
+@media (max-width: 767px) {
+  /* Hide User ID column (3rd child) */
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(3),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(3) {
+    display: none;
+  }
+
+  /* Hide Module Access icon columns (5th-11th children) */
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(5),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(6),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(7),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(8),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(9),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(10),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(11),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(5),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(6),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(7),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(8),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(9),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(10),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(11) {
+    display: none;
+  }
+
+  /* Hide Mask Shodan, Hash Identifiers, AI Assistant columns (14th-16th children) */
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(14),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(15),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(16),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(14),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(15),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(16) {
+    display: none;
+  }
+
+  /* Reduce cell padding on mobile */
+  .arkem-user-access-table__cell {
+    padding: var(--table-row-padding-y-mobile) var(--spacing-style-spacing-4px-3-12px);
+  }
+
+  /* Reduce subheader cell padding on mobile */
+  .arkem-user-access-table__subheader-cell {
+    padding: var(--table-row-padding-y-mobile) var(--spacing-style-spacing-4px-3-12px);
+  }
+
+  /* Reduce Name column min-width on mobile */
+  .arkem-user-access-table__subheader-cell--sticky {
+    min-width: var(--table-col-name-min-mobile);
+  }
+
+  .arkem-user-access-table__cell--sticky {
+    min-width: var(--table-col-name-min-mobile);
+    white-space: normal;
+  }
+
+  /* Enable text wrapping for user name on mobile */
+  .arkem-user-access-table__user-name {
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Reduce number column min-widths on mobile */
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(4),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(12),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(13),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(4),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(12),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(13) {
+    min-width: var(--table-col-number-min-mobile);
+    width: var(--table-col-number-min-mobile);
+    text-align: center;
+  }
+
+  /* Reduce header font sizes slightly on mobile */
+  .arkem-user-access-table__header-cell--group {
+    font-size: var(--fonts-semantic-sm);
+    line-height: var(--fonts-semantic-sm-line-height);
+    padding: var(--spacing-style-spacing-4px-1-4px) var(--spacing-style-spacing-4px-2-8px);
+  }
+
+  .arkem-user-access-table__subheader-cell {
+    font-size: var(--fonts-semantic-xs);
+    line-height: var(--fonts-semantic-xs-line-height);
+  }
+
+  /* Ensure touch targets are minimum 44x44px */
+  .arkem-user-access-table__cell--checkbox,
+  .arkem-user-access-table__subheader-cell--checkbox {
+    min-height: var(--touch-target-min-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arkem-user-access-table__cell:last-child,
+  .arkem-user-access-table__subheader-cell:last-child {
+    min-height: var(--touch-target-min-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Touch feedback for interactive elements */
+  .arkem-user-access-table__cell--checkbox:active,
+  .arkem-user-access-table__subheader-cell--checkbox:active {
+    background-color: var(--semantic-background-interactive);
+  }
+
+  .arkem-user-access-table__cell:last-child:active,
+  .arkem-user-access-table__subheader-cell:last-child:active {
+    background-color: var(--semantic-background-interactive);
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - TABLET (768px - 1024px)
+   ======================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Show User ID column on tablet */
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(3),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(3) {
+    display: table-cell;
+  }
+
+  /* Show first 4 Module Access icon columns, hide remaining 3 */
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(5),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(6),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(7),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(8),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(5),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(6),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(7),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(8) {
+    display: table-cell;
+  }
+
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(9),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(10),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell--icon:nth-child(11),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(9),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(10),
+  .arkem-user-access-table__row .arkem-user-access-table__cell--icon:nth-child(11) {
+    display: none;
+  }
+
+  /* Show all Data Access columns on tablet */
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(14),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(15),
+  .arkem-user-access-table__subheader-row .arkem-user-access-table__subheader-cell:nth-child(16),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(14),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(15),
+  .arkem-user-access-table__row .arkem-user-access-table__cell:nth-child(16) {
+    display: table-cell;
+  }
+
+  /* Optimize column widths for tablet */
+  .arkem-user-access-table__subheader-cell--sticky {
+    min-width: var(--table-col-name-min-tablet);
+  }
+
+  .arkem-user-access-table__cell--sticky {
+    min-width: var(--table-col-name-min-tablet);
+  }
+}
+

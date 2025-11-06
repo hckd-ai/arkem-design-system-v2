@@ -1,0 +1,24 @@
+.arkem-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-style-spacing-4px-0-5-2px) var(--spacing-style-spacing-4px-1-5-6px);
+  border-radius: var(--radius-mode-1-radius-max);
+  font-family: var(--font-family-base);
+  font-size: var(--fonts-semantic-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--fonts-semantic-xs-line-height);
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.arkem-badge[data-variant="admin"] {
+  background: var(--semantic-brand-base);
+  color: var(--semantic-text-inverse);
+}
+
+.arkem-badge[data-variant="user"] {
+  background: var(--semantic-background-interactive);
+  color: var(--semantic-text-secondary);
+}
+

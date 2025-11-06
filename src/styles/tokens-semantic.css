@@ -142,4 +142,65 @@
   --semantic-divider: var(--color-fill-neutral-500);
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-skeuomorphic: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  
+  /* Table-specific tokens */
+  --table-border: var(--semantic-border-subtle);
+  --table-border-outer: var(--semantic-border-subtle);
+  --table-border-outer-width: var(--border-width-thin);
+  --table-border-outer-radius: var(--radius-sm);
+  --table-header-bg: var(--table-row-even);
+  --table-row-odd: var(--color-fill-neutral-900);
+  --table-row-even: var(--color-fill-neutral-700);
+  --table-row-hover: var(--color-fill-neutral-600);
+  --table-row-selected: var(--color-fill-neutral-800);
+  --table-body-text: var(--semantic-text-primary);
+  --table-header-text: var(--semantic-text-secondary);
+  --table-label-text: var(--semantic-text-secondary);
+  --table-row-divider: color-mix(in srgb, var(--color-fill-neutral-500) 70%, transparent);
+  
+  /* Table column sizing tokens */
+  --table-col-name-min: 200px;
+  --table-col-role-min: 100px;
+  --table-col-number-min: 100px;
+  --table-col-icon-width: 40px;
+  --table-col-icon-header-min: 120px;
+  --table-col-actions-width: 40px;
+  --table-row-padding-y: var(--spacing-style-spacing-4px-2-8px);
+  --table-row-padding-y-large: var(--spacing-style-spacing-4px-3-12px);
+  
+  /* Responsive breakpoints */
+  --breakpoint-mobile: 767px;
+  --breakpoint-tablet: 1024px;
+  
+  /* Mobile-specific column widths */
+  --table-col-name-min-mobile: 150px;
+  --table-col-number-min-mobile: 80px;
+  
+  /* Responsive padding */
+  --table-row-padding-y-mobile: var(--spacing-style-spacing-4px-2-8px);
+  
+  /* Scroll indicator tokens */
+  --table-scroll-indicator-width: var(--spacing-style-spacing-4px-5-20px);
+  --table-scroll-indicator-overlay: color-mix(in srgb, var(--semantic-background-backdrop) 50%, transparent);
+  
+  /* Tablet-specific column widths */
+  --table-col-name-min-tablet: 180px;
+  
+  /* Accessibility tokens */
+  --touch-target-min-size: 44px;
+  
+  /* Data Access border token */
+  --table-border-data-access: color-mix(in srgb, var(--semantic-border-subtle) 30%, transparent);
+  
+  /* Icon tones (reduce yellow noise) */
+  --icon-muted: var(--semantic-text-muted);
+  --icon-weak: color-mix(in oklab, var(--semantic-text-secondary) 70%, transparent);
+  
+  /* Pagination component tokens */
+  --pagination-height: 56px;
+  --pagination-button-size: 36px;
+  --pagination-icon-size: 18px;
+  
+  /* Table and Pagination spacing */
+  --table-pagination-spacing: calc(var(--pagination-height) + var(--spacing-style-spacing-4px-6-24px));
 }
